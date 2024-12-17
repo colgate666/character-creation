@@ -47,7 +47,7 @@ bool UTILS::isInRange(const Vector3& a, const Vector3& b, const float& range)
 }
 
 bool is_busy() {
-	return PLAYER::GET_PLAYER_WANTED_LEVEL(0) || MISC::GET_MISSION_FLAG() || PED::IS_PED_IN_ANY_VEHICLE(GlobalData::PLAYER_ID, 0);
+	return PLAYER::GET_PLAYER_WANTED_LEVEL(0) || PED::IS_PED_IN_ANY_VEHICLE(GlobalData::PLAYER_ID, 0);
 }
 
 bool UTILS::can_open_loadingmenu() {

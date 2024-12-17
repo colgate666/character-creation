@@ -138,7 +138,7 @@ void handle_loading_menu_opening() {
 		return;
 	}
 
-	if (PAD::IS_CONTROL_JUST_PRESSED(0, GlobalData::loadingmenu_key)) {
+	if (PAD::IS_CONTROL_PRESSED(0, eControl::ControlSprint) && PAD::IS_CONTROL_PRESSED(0, eControl::ControlSelectWeapon) && PAD::IS_CONTROL_PRESSED(0, eControl::ControlDuck)) {
 		//lock_player();
 		LOADINGMENU::open();
 	}
