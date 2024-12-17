@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "screen.h"
-#include "natives.hpp"
+#include "inc/natives.h"
 #include <string>
 
 void SCREEN::ShowHelpTextThisFrame(const char* text, bool beep)

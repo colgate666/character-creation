@@ -2,7 +2,7 @@
 
 #include "utils.h"
 
-#include "natives.hpp"
+#include <inc/natives.h>
 #include "screen.h"
 #include <cmath>
 #include <math.h>

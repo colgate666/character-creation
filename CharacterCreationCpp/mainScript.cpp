@@ -3,13 +3,13 @@
 #include "mainScript.h"
 
 #include "json.hpp"
-#include "natives.hpp"
+#include "inc/natives.h"
 #include "characterCreationMenu.h"
 #include "loadingMenu.h"
 #include "outfitCreationMenu.h"
 #include "utils.h"
 #include "screen.h"
-#include "enums.h"
+#include "inc/enums.h"
 #include "blip.h"
 #include "characterData.h"
 #include "toml.hpp"
@@ -203,7 +203,7 @@ void shop_tick()
 		CAM::DO_SCREEN_FADE_OUT(2000);
 		WAIT(4000);
 
-		ENTITY::SET_ENTITY_COORDS(GlobalData::PLAYER_ID, current_shop.in_coord.x, current_shop.in_coord.y, current_shop.in_coord.z, 1, 0, 0, 1);
+		ENTITY::SET_ENTITY_COORDS(GlobalData::PLAYER_ID, { current_shop.in_coord.x, current_shop.in_coord.y, current_shop.in_coord.z }, 1, 0, 0, 1);
 
 		WAIT(2000);
 		CAM::DO_SCREEN_FADE_IN(2000);
@@ -218,7 +218,7 @@ void shop_tick()
 			CAM::DO_SCREEN_FADE_OUT(2000);
 			WAIT(4000);
 
-			ENTITY::SET_ENTITY_COORDS(GlobalData::PLAYER_ID, current_shop.out_coord.x, current_shop.out_coord.y, current_shop.out_coord.z, 1, 0, 0, 1);
+			ENTITY::SET_ENTITY_COORDS(GlobalData::PLAYER_ID, { current_shop.out_coord.x, current_shop.out_coord.y, current_shop.out_coord.z }, 1, 0, 0, 1);
 
 			WAIT(2000);
 			CAM::DO_SCREEN_FADE_IN(2000);
@@ -235,11 +235,11 @@ void outfit_tick() {
 		CAM::DO_SCREEN_FADE_OUT(2000);
 		WAIT(4000);
 
-		ENTITY::SET_ENTITY_COORDS(GlobalData::PLAYER_ID, current_shop.in_coord.x, current_shop.in_coord.y, current_shop.in_coord.z, 1, 0, 0, 1);
+		ENTITY::SET_ENTITY_COORDS(GlobalData::PLAYER_ID, { current_shop.in_coord.x, current_shop.in_coord.y, current_shop.in_coord.z }, 1, 0, 0, 1);
 		
 		if (OUTFITMENU::Data::reset) {
 			PED::SET_PED_DEFAULT_COMPONENT_VARIATION(GlobalData::PLAYER_ID);
-			PED::CLEAR_ALL_PED_PROPS(GlobalData::PLAYER_ID);
+			PED::CLEAR_ALL_PED_PROPS(GlobalData::PLAYER_ID, NULL);
 			PED::SET_HEAD_BLEND_EYE_COLOR(GlobalData::PLAYER_ID, 1);
 		}
 
@@ -256,7 +256,7 @@ void outfit_tick() {
 			CAM::DO_SCREEN_FADE_OUT(2000);
 			WAIT(4000);
 
-			ENTITY::SET_ENTITY_COORDS(GlobalData::PLAYER_ID, current_shop.out_coord.x, current_shop.out_coord.y, current_shop.out_coord.z, 1, 0, 0, 1);
+			ENTITY::SET_ENTITY_COORDS(GlobalData::PLAYER_ID, { current_shop.out_coord.x, current_shop.out_coord.y, current_shop.out_coord.z }, 1, 0, 0, 1);
 			
 			WAIT(2000);
 			CAM::DO_SCREEN_FADE_IN(2000);
@@ -340,7 +340,7 @@ void MainScriptAbort() {
 	if (OUTFITMENU::Data::creating) {
 		CAM::DO_SCREEN_FADE_OUT(2000);
 		WAIT(4000);
-		ENTITY::SET_ENTITY_COORDS(GlobalData::PLAYER_ID, -1204.60474f, -780.3441f, 16.3322849f, 1, 0, 0, 1);
+		ENTITY::SET_ENTITY_COORDS(GlobalData::PLAYER_ID, { -1204.60474f, -780.3441f, 16.3322849f }, 1, 0, 0, 1);
 		WAIT(2000);
 		CAM::DO_SCREEN_FADE_IN(2000);
 		WAIT(1500);

@@ -78,6 +78,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <TargetExt>.asi</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -125,14 +126,14 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\Users\Jesus\Downloads\ScriptHookV_SDK_1.0.617.1a\inc;C:\Users\Jesus\Downloads\nlohmann_json\include\single_include\nlohmann;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)modules;$(SolutionDir)GTAVMenuBase;$(ProjectDir)nlohmann;$(ProjectDir)toml;$(ProjectDir)SHV SDK;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>C:\Users\Jesus\Downloads\ScriptHookV_SDK_1.0.617.1a\lib\ScriptHookV.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(ProjectDir)\lib\ScriptHookV.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -166,29 +167,34 @@
     <ClInclude Include="InstructionalButton.h" />
     <ClInclude Include="loadingMenu.h" />
     <ClInclude Include="mainScript.h" />
-    <ClInclude Include="menu.h" />
-    <ClInclude Include="menucontrols.h" />
-    <ClInclude Include="menukeyboard.h" />
-    <ClInclude Include="menumemutils.hpp" />
-    <ClInclude Include="menusettings.h" />
-    <ClInclude Include="menuutils.h" />
     <ClInclude Include="outfitCreationMenu.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Scaleform.h" />
     <ClInclude Include="screen.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\GTAVMenuBase\menu.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\GTAVMenuBase\menucontrols.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\GTAVMenuBase\menukeyboard.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\GTAVMenuBase\menumemutils.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\GTAVMenuBase\menusettings.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\GTAVMenuBase\menuutils.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="blip.cpp" />
     <ClCompile Include="characterCreationMenu.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="loadingMenu.cpp" />
-    <ClCompile Include="menu.cpp" />
-    <ClCompile Include="menucontrols.cpp" />
-    <ClCompile Include="menukeyboard.cpp" />
-    <ClCompile Include="menumemutils.cpp" />
-    <ClCompile Include="menusettings.cpp" />
-    <ClCompile Include="menuutils.cpp" />
     <ClCompile Include="outfitCreationMenu.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

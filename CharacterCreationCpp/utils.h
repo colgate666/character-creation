@@ -1,8 +1,8 @@
 #pragma once
 
 #include "mainScript.h"
-#include "types.h"
-#include "enums.h"
+#include "inc/types.h"
+#include "inc/enums.h"
 #include <string>
 
 namespace UTILS {

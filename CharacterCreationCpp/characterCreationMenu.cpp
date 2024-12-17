@@ -2,7 +2,7 @@
 
 #include "characterCreationMenu.h"
 
-#include "natives.hpp"
+#include "inc/natives.h"
 #include "utils.h"
 #include "json.hpp"
 #include "mainScript.h"
@@ -334,12 +334,12 @@ void facecam_start(bool offset)
 		cam_offset.y = -1.6f;
 
 	cam_offset.y = 0.5f;
-	Vector3 bone_coords = PED::GET_PED_BONE_COORDS(GlobalData::PLAYER_ID, eBone::SKEL_Head, cam_offset.x, cam_offset.y, cam_offset.z);
+	Vector3 bone_coords = PED::GET_PED_BONE_COORDS(GlobalData::PLAYER_ID, eBone::SKEL_Head, { cam_offset.x, cam_offset.y, cam_offset.z });
 	Vector3 cam_look_coords = Vector3();
 	MISC::GET_MODEL_DIMENSIONS(player_model, &dimensions, &ignore);
 	dimensions.x = 0;
 	dimensions.z = 0;
-	Vector3 rear_position = ENTITY::GET_OFFSET_FROM_ENTITY_IN_WORLD_COORDS(GlobalData::PLAYER_ID, dimensions.x, dimensions.y, dimensions.z);
+	Vector3 rear_position = ENTITY::GET_OFFSET_FROM_ENTITY_IN_WORLD_COORDS(GlobalData::PLAYER_ID, { dimensions.x, dimensions.y, dimensions.z });
 	cam_look_coords.x = rear_position.x;
 	cam_look_coords.y = rear_position.y;
 
@@ -347,8 +347,8 @@ void facecam_start(bool offset)
 		cam_look_coords.y -= 0.4f;
 
 	cam_look_coords.z = rear_position.z + 0.7f;
-	CAM::SET_CAM_COORD(face_camera, bone_coords.x, bone_coords.y, bone_coords.z);
-	CAM::POINT_CAM_AT_COORD(face_camera, cam_look_coords.x, cam_look_coords.y, cam_look_coords.z);
+	CAM::SET_CAM_COORD(face_camera, { bone_coords.x, bone_coords.y, bone_coords.z });
+	CAM::POINT_CAM_AT_COORD(face_camera, { cam_look_coords.x, cam_look_coords.y, cam_look_coords.z });
 	CAM::SET_CAM_ACTIVE(face_camera, true);
 	CAM::RENDER_SCRIPT_CAMS(1, 1, 1000, 1, 0, 0);
 }
@@ -956,7 +956,7 @@ void update_customization() {
 
 	if (CHARACTERMENU::Data::mode == CHARACTERMENU::eMenuMode::all || CHARACTERMENU::Data::mode == CHARACTERMENU::eMenuMode::tattoo) {
 		if (menu.MenuOption("Tattoos", "tattoomenu")) {
-			PED::CLEAR_ALL_PED_PROPS(GlobalData::PLAYER_ID);
+			PED::CLEAR_ALL_PED_PROPS(GlobalData::PLAYER_ID, NULL);
 			PED::SET_PED_DEFAULT_COMPONENT_VARIATION(GlobalData::PLAYER_ID);
 
 			if (UTILS::get_gender() == eGender::GenderFemale) {
@@ -998,23 +998,23 @@ void restore_outfit() {
 	PED::SET_PED_COMPONENT_VARIATION(GlobalData::PLAYER_ID, 10, current_character.badge_drawable, 0, 0);
 
 	if (current_character.has_hat) {
-		PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 0, current_character.hat_type, current_character.hat_color, 1);
+		PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 0, current_character.hat_type, current_character.hat_color, 1, NULL);
 	}
 
 	if (current_character.has_glasses) {
-		PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 1, current_character.glasses_type, current_character.glasses_color, 1);
+		PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 1, current_character.glasses_type, current_character.glasses_color, 1, NULL);
 	}
 
 	if (current_character.has_ear) {
-		PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 2, current_character.ear_type, current_character.ear_color, 1);
+		PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 2, current_character.ear_type, current_character.ear_color, 1, NULL);
 	}
 
 	if (current_character.has_watch) {
-		PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 6, current_character.watch_type, current_character.watch_color, 1);
+		PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 6, current_character.watch_type, current_character.watch_color, 1, NULL);
 	}
 
 	if (current_character.has_bracelet) {
-		PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 7, current_character.bracelet_type, current_character.bracelet_color, 1);
+		PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 7, current_character.bracelet_type, current_character.bracelet_color, 1, NULL);
 	}
 
 	tattoo_lock_in = true;

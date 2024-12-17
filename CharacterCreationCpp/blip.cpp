@@ -9,7 +9,7 @@ void BLIPS::SetBlipName(Blip blip, const char* name)
 }
 
 Blip BLIPS::Create(float x, float y, float z, int sprite, eBlipColor color, const char* name) {
-	Blip blipHandle = HUD::ADD_BLIP_FOR_COORD(x, y, z);
+	Blip blipHandle = HUD::ADD_BLIP_FOR_COORD({ x, y, z });
 	HUD::SET_BLIP_SPRITE(blipHandle, sprite);
 	HUD::SET_BLIP_COLOUR(blipHandle, color);
 	SetBlipName(blipHandle, name);

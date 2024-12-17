@@ -2,7 +2,7 @@
 
 #include "outfitCreationMenu.h"
 
-#include "natives.hpp"
+#include "inc/natives.h"
 #include "utils.h"
 #include "mainScript.h"
 #include "json.hpp"
@@ -76,17 +76,17 @@ void faceshot_start()
 	cam_offset.x = 0.1f;
 	//cam_offset.y = 0.4f;
 	cam_offset.y = 0.5f;
-	Vector3 bone_coords = PED::GET_PED_BONE_COORDS(GlobalData::PLAYER_ID, eBone::SKEL_Head, cam_offset.x, cam_offset.y, cam_offset.z);
+	Vector3 bone_coords = PED::GET_PED_BONE_COORDS(GlobalData::PLAYER_ID, eBone::SKEL_Head, { cam_offset.x, cam_offset.y, cam_offset.z });
 	Vector3 cam_look_coords = Vector3();
 	MISC::GET_MODEL_DIMENSIONS(player_model, &dimensions, &ignore);
 	dimensions.x = 0;
 	dimensions.z = 0;
-	Vector3 rear_position = ENTITY::GET_OFFSET_FROM_ENTITY_IN_WORLD_COORDS(GlobalData::PLAYER_ID, dimensions.x, dimensions.y, dimensions.z);
+	Vector3 rear_position = ENTITY::GET_OFFSET_FROM_ENTITY_IN_WORLD_COORDS(GlobalData::PLAYER_ID, { dimensions.x, dimensions.y, dimensions.z });
 	cam_look_coords.x = rear_position.x;
 	cam_look_coords.y = rear_position.y;
 	cam_look_coords.z = rear_position.z + 0.7f;
-	CAM::SET_CAM_COORD(face_cam, bone_coords.x, bone_coords.y, bone_coords.z);
-	CAM::POINT_CAM_AT_COORD(face_cam, cam_look_coords.x, cam_look_coords.y, cam_look_coords.z);
+	CAM::SET_CAM_COORD(face_cam, { bone_coords.x, bone_coords.y, bone_coords.z });
+	CAM::POINT_CAM_AT_COORD(face_cam, { cam_look_coords.x, cam_look_coords.y, cam_look_coords.z });
 	CAM::SET_CAM_ACTIVE(face_cam, true);
 	CAM::RENDER_SCRIPT_CAMS(1, 1, 1000, 1, 0, 0);
 }
@@ -107,17 +107,17 @@ void legcam_start() {
 	cam_offset.x = 0.35f;
 	//cam_offset.y = 1.0f;
 	cam_offset.y = 0.9f;
-	Vector3 bone_coords = PED::GET_PED_BONE_COORDS(GlobalData::PLAYER_ID, eBone::SKEL_Pelvis, cam_offset.x, cam_offset.y, cam_offset.z);
+	Vector3 bone_coords = PED::GET_PED_BONE_COORDS(GlobalData::PLAYER_ID, eBone::SKEL_Pelvis, { cam_offset.x, cam_offset.y, cam_offset.z });
 	Vector3 cam_look_coords = Vector3();
 	MISC::GET_MODEL_DIMENSIONS(player_model, &dimensions, &ignore);
 	dimensions.x = 0;
 	dimensions.z = 0;
-	Vector3 rear_position = ENTITY::GET_OFFSET_FROM_ENTITY_IN_WORLD_COORDS(GlobalData::PLAYER_ID, dimensions.x, dimensions.y, dimensions.z);
+	Vector3 rear_position = ENTITY::GET_OFFSET_FROM_ENTITY_IN_WORLD_COORDS(GlobalData::PLAYER_ID, { dimensions.x, dimensions.y, dimensions.z });
 	cam_look_coords.x = rear_position.x;
 	cam_look_coords.y = rear_position.y;
 	cam_look_coords.z = rear_position.z - 0.35f;
-	CAM::SET_CAM_COORD(leg_cam, bone_coords.x, bone_coords.y, bone_coords.z);
-	CAM::POINT_CAM_AT_COORD(leg_cam, cam_look_coords.x, cam_look_coords.y, cam_look_coords.z);
+	CAM::SET_CAM_COORD(leg_cam, { bone_coords.x, bone_coords.y, bone_coords.z });
+	CAM::POINT_CAM_AT_COORD(leg_cam, { cam_look_coords.x, cam_look_coords.y, cam_look_coords.z });
 	CAM::SET_CAM_ACTIVE(leg_cam, true);
 	CAM::RENDER_SCRIPT_CAMS(1, 1, 1000, 1, 0, 0);
 }
@@ -138,17 +138,17 @@ void shoecam_start() {
 	cam_offset.x = 0.5f;
 	//cam_offset.y = 1.0f;
 	cam_offset.y = 0.8f;
-	Vector3 bone_coords = PED::GET_PED_BONE_COORDS(GlobalData::PLAYER_ID, eBone::SKEL_Pelvis, cam_offset.x, cam_offset.y, cam_offset.z);
+	Vector3 bone_coords = PED::GET_PED_BONE_COORDS(GlobalData::PLAYER_ID, eBone::SKEL_Pelvis, { cam_offset.x, cam_offset.y, cam_offset.z });
 	Vector3 cam_look_coords = Vector3();
 	MISC::GET_MODEL_DIMENSIONS(player_model, &dimensions, &ignore);
 	dimensions.x = 0;
 	dimensions.z = 0;
-	Vector3 rear_position = ENTITY::GET_OFFSET_FROM_ENTITY_IN_WORLD_COORDS(GlobalData::PLAYER_ID, dimensions.x, dimensions.y, dimensions.z);
+	Vector3 rear_position = ENTITY::GET_OFFSET_FROM_ENTITY_IN_WORLD_COORDS(GlobalData::PLAYER_ID, { dimensions.x, dimensions.y, dimensions.z });
 	cam_look_coords.x = rear_position.x;
 	cam_look_coords.y = rear_position.y;
 	cam_look_coords.z = rear_position.z - 0.8f;
-	CAM::SET_CAM_COORD(shoe_cam, bone_coords.x, bone_coords.y, bone_coords.z);
-	CAM::POINT_CAM_AT_COORD(shoe_cam, cam_look_coords.x, cam_look_coords.y, cam_look_coords.z);
+	CAM::SET_CAM_COORD(shoe_cam, { bone_coords.x, bone_coords.y, bone_coords.z });
+	CAM::POINT_CAM_AT_COORD(shoe_cam, { cam_look_coords.x, cam_look_coords.y, cam_look_coords.z });
 	CAM::SET_CAM_ACTIVE(shoe_cam, true);
 	CAM::RENDER_SCRIPT_CAMS(1, 1, 1000, 1, 0, 0);
 }
@@ -337,7 +337,7 @@ void update_hatmenu() {
 	omenu.Subtitle("Change your hat.");
 
 	if (omenu.BoolOption("Has hat", current_character.has_hat)) {
-		if (OUTFITMENU::Data::creating && !current_character.has_hat) PED::CLEAR_PED_PROP(GlobalData::PLAYER_ID, 0);
+		if (OUTFITMENU::Data::creating && !current_character.has_hat) PED::CLEAR_PED_PROP(GlobalData::PLAYER_ID, 0, NULL);
 	}
 
 	if (omenu.IntOption("Type", current_character.hat_type, 0, OUTFITMENU::outfit_data.max_hat_type)) {
@@ -346,14 +346,14 @@ void update_hatmenu() {
 
 		if (OUTFITMENU::Data::creating) {
 			current_character.has_hat = true;
-			PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 0, current_character.hat_type, 0, 1);
+			PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 0, current_character.hat_type, 0, 1, NULL);
 		}
 	}
 
 	if (omenu.IntOption("Color", current_character.hat_color, 0, OUTFITMENU::outfit_data.max_hat_color)) {
 		if (OUTFITMENU::Data::creating) {
 			current_character.has_hat = true;
-			PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 0, current_character.hat_type, current_character.hat_color, 1);
+			PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 0, current_character.hat_type, current_character.hat_color, 1, NULL);
 		}
 	}
 }
@@ -363,7 +363,7 @@ void update_glassmenu() {
 	omenu.Subtitle("Change your glasses");
 
 	if (omenu.BoolOption("Has glasses", current_character.has_glasses)) {
-		if (OUTFITMENU::Data::creating && !current_character.has_glasses) PED::CLEAR_PED_PROP(GlobalData::PLAYER_ID, 1);
+		if (OUTFITMENU::Data::creating && !current_character.has_glasses) PED::CLEAR_PED_PROP(GlobalData::PLAYER_ID, 1, NULL);
 	}
 
 	if (omenu.IntOption("Type", current_character.glasses_type, 0, OUTFITMENU::outfit_data.max_glasses_type)) {
@@ -372,14 +372,14 @@ void update_glassmenu() {
 
 		if (OUTFITMENU::Data::creating) {
 			current_character.has_glasses = true;
-			PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 1, current_character.glasses_type, 0, 1);
+			PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 1, current_character.glasses_type, 0, 1, NULL);
 		}
 	}
 
 	if (omenu.IntOption("Color", current_character.glasses_color, 0, OUTFITMENU::outfit_data.max_glasses_color)) {
 		if (OUTFITMENU::Data::creating) {
 			current_character.has_glasses = true;
-			PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 1, current_character.glasses_type, current_character.glasses_color, 1);
+			PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 1, current_character.glasses_type, current_character.glasses_color, 1, NULL);
 		}
 	}
 }
@@ -389,7 +389,7 @@ void update_earmenu() {
 	omenu.Subtitle("Change your ear accessory");
 
 	if (omenu.BoolOption("Has ear accessory", current_character.has_ear)) {
-		if (OUTFITMENU::Data::creating && !current_character.has_ear) PED::CLEAR_PED_PROP(GlobalData::PLAYER_ID, 2);
+		if (OUTFITMENU::Data::creating && !current_character.has_ear) PED::CLEAR_PED_PROP(GlobalData::PLAYER_ID, 2, NULL);
 	}
 
 	if (omenu.IntOption("Type", current_character.ear_type, 0, OUTFITMENU::outfit_data.max_ear_type)) {
@@ -398,14 +398,14 @@ void update_earmenu() {
 
 		if (OUTFITMENU::Data::creating) {
 			current_character.has_ear = true;
-			PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 2, current_character.ear_type, 0, 1);
+			PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 2, current_character.ear_type, 0, 1, NULL);
 		}
 	}
 
 	if (omenu.IntOption("Color", current_character.ear_color, 0, OUTFITMENU::outfit_data.max_ear_color)) {
 		if (OUTFITMENU::Data::creating) {
 			current_character.has_ear = true;
-			PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 2, current_character.ear_type, current_character.ear_color, 1);
+			PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 2, current_character.ear_type, current_character.ear_color, 1, NULL);
 		}
 	}
 }
@@ -415,7 +415,7 @@ void update_watchmenu() {
 	omenu.Subtitle("Change your watch");
 
 	if (omenu.BoolOption("Has watch", current_character.has_watch)) {
-		if (OUTFITMENU::Data::creating && !current_character.has_watch) PED::CLEAR_PED_PROP(GlobalData::PLAYER_ID, 6);
+		if (OUTFITMENU::Data::creating && !current_character.has_watch) PED::CLEAR_PED_PROP(GlobalData::PLAYER_ID, 6, NULL);
 	}
 
 	if (omenu.IntOption("Type", current_character.watch_type, 0, OUTFITMENU::outfit_data.max_watch_type)) {
@@ -424,14 +424,14 @@ void update_watchmenu() {
 
 		if (OUTFITMENU::Data::creating) {
 			current_character.has_watch = true;
-			PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 6, current_character.watch_type, 0, 1);
+			PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 6, current_character.watch_type, 0, 1, NULL);
 		}
 	}
 
 	if (omenu.IntOption("Color", current_character.watch_color, 0, OUTFITMENU::outfit_data.max_watch_color)) {
 		if (OUTFITMENU::Data::creating) {
 			current_character.has_watch = true;
-			PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 6, current_character.watch_type, current_character.watch_color, 1);
+			PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 6, current_character.watch_type, current_character.watch_color, 1, NULL);
 		}
 	}
 }
@@ -441,7 +441,7 @@ void update_braceletmenu() {
 	omenu.Subtitle("Change your bracelet");
 
 	if (omenu.BoolOption("Has bracelet", current_character.has_bracelet)) {
-		if (OUTFITMENU::Data::creating && !current_character.has_bracelet) PED::CLEAR_PED_PROP(GlobalData::PLAYER_ID, 7);
+		if (OUTFITMENU::Data::creating && !current_character.has_bracelet) PED::CLEAR_PED_PROP(GlobalData::PLAYER_ID, 7, NULL);
 	}
 
 	if (omenu.IntOption("Type", current_character.bracelet_type, 0, OUTFITMENU::outfit_data.max_bracelet_type)) {
@@ -450,14 +450,14 @@ void update_braceletmenu() {
 
 		if (OUTFITMENU::Data::creating) {
 			current_character.has_bracelet = true;
-			PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 7, current_character.bracelet_type, 0, 1);
+			PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 7, current_character.bracelet_type, 0, 1, NULL);
 		}
 	}
 
 	if (omenu.IntOption("Color", current_character.bracelet_color, 0, OUTFITMENU::outfit_data.max_bracelet_color)) {
 		if (OUTFITMENU::Data::creating) {
 			current_character.has_bracelet = true;
-			PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 7, current_character.bracelet_type, current_character.bracelet_color, 1);
+			PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 7, current_character.bracelet_type, current_character.bracelet_color, 1, NULL);
 		}
 	}
 }

@@ -1,0 +1,9 @@
+[submodule "GTAVMenuBase"]
+	path = GTAVMenuBase
+	url = https://github.com/E66666666/GTAVMenuBase
+[submodule "simpleini"]
+	path = simpleini
+	url = https://github.com/brofield/simpleini
+[submodule "modules/simpleini"]
+	path = modules/simpleini
+	url = https://github.com/brofield/simpleini

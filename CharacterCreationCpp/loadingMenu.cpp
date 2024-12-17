@@ -2,7 +2,7 @@
 
 #include "loadingmenu.h"
 
-#include "natives.hpp"
+#include "inc/natives.h"
 #include "utils.h"
 #include "mainScript.h"
 #include "json.hpp"
@@ -171,10 +171,10 @@ void LOADINGMENU::load_outfit(const std::string& outfit_name) {
 	if (current_character.has_hat) {
 		current_character.hat_type = j["hat"]["drawable"];
 		current_character.hat_color = j["hat"]["texture"];
-		PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 0, current_character.hat_type, current_character.hat_color, 1);
+		PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 0, current_character.hat_type, current_character.hat_color, 1, NULL);
 	}
 	else {
-		PED::CLEAR_PED_PROP(GlobalData::PLAYER_ID, 0);
+		PED::CLEAR_PED_PROP(GlobalData::PLAYER_ID, 0, NULL);
 	}
 
 	current_character.has_glasses = j["glasses"]["enabled"];
@@ -182,10 +182,10 @@ void LOADINGMENU::load_outfit(const std::string& outfit_name) {
 	if (current_character.has_glasses) {
 		current_character.glasses_type = j["glasses"]["drawable"];
 		current_character.glasses_color = j["glasses"]["texture"];
-		PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 1, current_character.glasses_type, current_character.glasses_color, 1);
+		PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 1, current_character.glasses_type, current_character.glasses_color, 1, NULL);
 	}
 	else {
-		PED::CLEAR_PED_PROP(GlobalData::PLAYER_ID, 1);
+		PED::CLEAR_PED_PROP(GlobalData::PLAYER_ID, 1, NULL);
 	}
 
 	current_character.has_ear = j["ear"]["enabled"];
@@ -193,10 +193,10 @@ void LOADINGMENU::load_outfit(const std::string& outfit_name) {
 	if (current_character.has_ear) {
 		current_character.ear_type = j["ear"]["drawable"];
 		current_character.ear_color = j["ear"]["texture"];
-		PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 2, current_character.ear_type, current_character.ear_color, 1);
+		PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 2, current_character.ear_type, current_character.ear_color, 1, NULL);
 	}
 	else {
-		PED::CLEAR_PED_PROP(GlobalData::PLAYER_ID, 2);
+		PED::CLEAR_PED_PROP(GlobalData::PLAYER_ID, 2, NULL);
 	}
 
 	current_character.has_watch = j["watch"]["enabled"];
@@ -204,10 +204,10 @@ void LOADINGMENU::load_outfit(const std::string& outfit_name) {
 	if (current_character.has_watch) {
 		current_character.watch_type = j["watch"]["drawable"];
 		current_character.watch_color = j["watch"]["texture"];
-		PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 6, current_character.watch_type, current_character.watch_color, 1);
+		PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 6, current_character.watch_type, current_character.watch_color, 1, NULL);
 	}
 	else {
-		PED::CLEAR_PED_PROP(GlobalData::PLAYER_ID, 6);
+		PED::CLEAR_PED_PROP(GlobalData::PLAYER_ID, 6, NULL);
 	}
 
 	current_character.has_bracelet = j["bracelet"]["enabled"];
@@ -215,10 +215,10 @@ void LOADINGMENU::load_outfit(const std::string& outfit_name) {
 	if (current_character.has_bracelet) {
 		current_character.bracelet_type = j["bracelet"]["drawable"];
 		current_character.bracelet_color = j["bracelet"]["texture"];
-		PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 7, current_character.bracelet_type, current_character.bracelet_color, 1);
+		PED::SET_PED_PROP_INDEX(GlobalData::PLAYER_ID, 7, current_character.bracelet_type, current_character.bracelet_color, 1, NULL);
 	}
 	else {
-		PED::CLEAR_PED_PROP(GlobalData::PLAYER_ID, 7);
+		PED::CLEAR_PED_PROP(GlobalData::PLAYER_ID, 7, NULL);
 	}
 
 	SCREEN::ShowNotification("~g~Outfit loaded!");
